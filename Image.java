@@ -16,9 +16,21 @@ public class Image {
 		driver.get("http://leafground.com/pages/Image.html");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		driver.findElement(By.xpath("//div[@class='large-6 small-12 columns']/img")).click();
-		driver.findElement(By.xpath("//h5[text()='Image']")).click();
-		System.out.println(driver.findElement(By.xpath("(//div[@class=\"large-6 small-12 columns\"]/img)[2]")).isDisplayed());
-		driver.findElement(By.xpath("(//div[@class='large-6 small-12 columns']/img)[3]")).click();
+				driver.findElement(By.xpath("//div[@class='large-6 small-12 columns']//img")).click();
+		driver.navigate().back();
+		
+		driver.findElement(By.xpath("(//div[@class='large-6 small-12 columns'])[2]//img"));
+		String title = driver.getTitle();
+		System.out.println(title);
+		if(title.contains("Images")) {
+			System.out.println("Broken");
+		}
+		else {
+			System.out.println("Not Broken");
+		}
+		driver.findElement(By.xpath("(//div[@class='large-6 small-12 columns'])[3]//img")).click();
+		String title2 = driver.getTitle();
+		System.out.println(title2);
+
 	}
 }

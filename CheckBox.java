@@ -17,23 +17,20 @@ public class CheckBox {
 	    driver.get("http://leafground.com/pages/checkbox.html");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		driver.findElement(By.xpath("//div[@class='example']/input[1]")).click();
-		System.out.println(driver.findElement(By.xpath("//div[@class='example']/input[1]")).isSelected());
-		WebElement deselect = driver.findElement(By.xpath("//div[@class='example']/input[3]"));
-		System.out.println(deselect);
-		deselect.click();
-		System.out.println("DeSelect only checked");
-		WebElement option1= driver.findElement(By.xpath("(//input[@type='checkbox'])[9]"));
-		option1.click();
-		System.out.println(option1);
-		WebElement option2= driver.findElement(By.xpath("(//input[@type='checkbox'])[10]"));
-		option2.click();
-		System.out.println(option2);
-		WebElement option3= driver.findElement(By.xpath("(//input[@type='checkbox'])[11]"));
-		option3.click();
-		System.out.println(option3);
-		WebElement option4= driver.findElement(By.xpath("(//input[@type='checkbox'])[12]"));
-		option4.click();
+		driver.findElement(By.xpath("//label[text()='Select the languages that you know?']/following::input[3]")).click();
+		System.out.println("languages have selected");
+		boolean selected = driver.findElement(By.xpath("(//div[@class='example'])[2]/input")).isSelected();
+		System.out.println(" Selenium is checked is " +selected);
+		boolean select=driver.findElement(By.xpath("(//label[text()='DeSelect only checked']/following::input)[2]")).isSelected();
+		if(select){
+			driver.findElement(By.xpath("(//label[text()='DeSelect only checked']/following::input)[2]")).click();
+		}
+		System.out.println("Deselected the selected");
+		for (int i = 1; i <=6; i++) {
+			driver.findElement(By.xpath(("//label[text()='Select all below checkboxes ']/following-sibling::input["+i+"]"))).click();
+         }	
+        System.out.println("All boxes selected");
+        driver.close();
 		System.out.println(option4);
 		WebElement option5= driver.findElement(By.xpath("(//input[@type='checkbox'])[13]"));
 		option5.click();
